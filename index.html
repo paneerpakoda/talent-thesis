@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Boring Revolution — Talent Thesis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page:#080B12;
+    --bg:#0E1220;
+    --card:#161B2C;
+    --card-2:#1C2336;
+    --border:#28304A;
+    --border-soft:#1F2740;
+    --text:#EEF0F7;
+    --text-soft:#9AA2B8;
+    --text-faint:#828AA2;
+    --indigo:#5B6CF0;
+    --indigo-bright:#8E9BF5;
+    --indigo-deep:#4453C9;
+    --indigo-pale:#C7CDF6;
+    --indigo-soft:rgba(91,108,240,.14);
+    --g1:#262D45;
+    --g2:#323A58;
+    --g3:#414B70;
+    --rose:#EF8AA0;
+    --font:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:
+      radial-gradient(1200px 700px at 18% -10%, rgba(91,108,240,.10), transparent 60%),
+      var(--page);
+    color:var(--text);
+    font-family:var(--font);
+    display:grid;place-items:center;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---- 16:9 stage ---- */
+  .stage{
+    position:relative;
+    width:min(100vw, calc(100vh * 16 / 9));
+    height:min(100vh, calc(100vw * 9 / 16));
+  }
+  .deck{
+    position:absolute; inset:0;
+    margin:auto;
+    width:calc(100% - 2.4vmin);
+    height:calc(100% - 2.4vmin);
+    background:var(--bg);
+    border:1px solid var(--border-soft);
+    border-radius:clamp(10px,1.5vmin,22px);
+    overflow:hidden;
+    box-shadow:0 30px 90px -30px rgba(0,0,0,.8);
+    container-type:size;
+  }
+
+  /* ---- progress ---- */
+  .progress{position:absolute;top:0;left:0;height:.32cqh;background:var(--indigo);width:0;z-index:30;transition:width .35s ease}
+
+  /* ---- slide shell ---- */
+  .slide{
+    position:absolute; inset:0;
+    padding:5cqh 6cqw 3.6cqh;
+    display:flex; flex-direction:column;
+    opacity:0; visibility:hidden;
+    transition:opacity .45s ease;
+    container-type:size;
+  }
+  .slide.active{opacity:1; visibility:visible}
+  @media (prefers-reduced-motion: reduce){.slide{transition:none}.progress{transition:none}}
+
+  .ctop{display:flex;justify-content:space-between;align-items:center;flex:none}
+  .body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center}
+  .body.top{justify-content:flex-start;padding-top:1.6cqh}
+  .foot{flex:none;display:flex;justify-content:space-between;align-items:flex-end;
+    font-size:.92cqw;color:var(--text-faint);font-weight:500;letter-spacing:.02em;
+    border-top:1px solid var(--border-soft);padding-top:1.5cqh;margin-top:1.5cqh}
+  .foot .pageno{visibility:hidden}
+
+  /* ---- type ---- */
+  .kicker{font-size:1.02cqw;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--indigo-bright)}
+  .mark{font-size:1cqw;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--text-faint)}
+  .h{font-weight:800;letter-spacing:-.03em;line-height:1.02;color:var(--text)}
+  .h.xl{font-size:6.4cqw}
+  .h.lg{font-size:4.7cqw;line-height:1.04}
+  .h.md{font-size:3.6cqw;line-height:1.06}
+  .h.sm{font-size:2.9cqw;line-height:1.1}
+  .h .ac{color:var(--indigo-bright)}
+  .lead{font-size:1.55cqw;line-height:1.5;color:var(--text-soft);font-weight:400;max-width:46ch}
+  .lead .em{color:var(--indigo-bright);font-weight:600}
+  .lead .neg{color:var(--rose);font-weight:600}
+  .subtle{color:var(--text-faint)}
+
+  /* ---- big number ---- */
+  .bignum{font-weight:800;letter-spacing:-.035em;line-height:.88;color:var(--text);font-variant-numeric:tabular-nums}
+  .bignum .u{font-weight:600;font-size:.46em;color:var(--text-soft);letter-spacing:-.01em;margin-left:.08em}
+  .bignum.acc{color:var(--indigo-bright)} .bignum.acc .u{color:var(--indigo-pale)}
+  .bignum.neg{color:var(--rose)} .bignum.neg .u{color:var(--rose)}
+
+  /* ---- card ---- */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:1.5cqw;padding:2.4cqw}
+  .card.tight{padding:1.8cqw}
+
+  /* ---- solid indigo hero panel ---- */
+  .panel{
+    background:linear-gradient(150deg,var(--indigo) 0%,var(--indigo-deep) 100%);
+    border-radius:1.7cqw;
+    padding:3cqw;
+    display:flex;flex-direction:column;justify-content:center;
+    color:#fff;position:relative;overflow:hidden;
+    box-shadow:0 18px 50px -22px rgba(91,108,240,.7);
+  }
+  .panel::after{content:"";position:absolute;right:-12%;top:-30%;width:55%;height:80%;
+    background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);border-radius:50%}
+  .panel .pn{font-weight:800;letter-spacing:-.05em;line-height:.85;font-size:7.2cqw;font-variant-numeric:tabular-nums}
+  .panel .pn .u{font-weight:600;font-size:.42em;margin-left:.06em;opacity:.85}
+  .panel .plab{font-size:1.5cqw;font-weight:600;margin-top:1.6cqh;line-height:1.35;max-width:24ch;color:rgba(255,255,255,.92)}
+  .panel .psub{font-size:1.05cqw;font-weight:500;margin-top:1.2cqh;color:rgba(255,255,255,.72);letter-spacing:.01em}
+
+  /* ---- pills / chips ---- */
+  .pill{display:inline-flex;align-items:center;gap:.5cqw;border:1px solid var(--indigo-deep);color:var(--indigo-bright);
+    border-radius:999px;padding:.7cqh 1.3cqw;font-size:1.02cqw;font-weight:600;letter-spacing:.01em}
+  .pillrow{display:flex;gap:1cqw;flex-wrap:wrap}
+  .statchip{display:inline-flex;align-items:center;gap:.8cqw;background:var(--card-2);border:1px solid var(--border);
+    border-radius:999px;padding:.9cqh 1.4cqw;font-size:1.08cqw;font-weight:500;color:var(--text-soft)}
+  .statchip b{color:var(--indigo-bright);font-weight:700}
+  .statchip .sep{width:1px;height:1.7cqh;background:var(--border)}
+
+  /* ---- stat callout (img2) ---- */
+  .calls{display:flex;flex-direction:column;gap:2.2cqh}
+  .call{border-bottom:1px solid var(--border);padding-bottom:1.5cqh}
+  .call .top{display:flex;align-items:baseline;gap:1cqw}
+  .call .n{font-size:3.6cqw;font-weight:800;color:var(--indigo-bright);letter-spacing:-.04em;line-height:.9;font-variant-numeric:tabular-nums}
+  .call .n .u{font-size:.42em;color:var(--indigo-pale);font-weight:600;margin-left:.04em}
+  .call .tag{font-size:1.02cqw;font-weight:600;color:var(--text-soft);line-height:1.2;text-transform:uppercase;letter-spacing:.06em}
+  .call .desc{font-size:1.12cqw;color:var(--text-soft);margin-top:.9cqh;font-weight:400}
+
+  /* ---- two-col ---- */
+  .two{display:grid;grid-template-columns:1.06fr .94fr;gap:3.4cqw;align-items:center}
+  .two.even{grid-template-columns:1fr 1fr}
+  .two.wideR{grid-template-columns:.9fr 1.1fr}
+
+  /* ---- rounded bar chart ---- */
+  .barchart{display:flex;align-items:flex-end;gap:1.6cqw;height:26cqh}
+  .barcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .barval{font-weight:800;font-size:1.5cqw;letter-spacing:-.03em;margin-bottom:.8cqh;color:var(--text);font-variant-numeric:tabular-nums;line-height:1}
+  .barval.neg{color:var(--rose)}
+  .bar{width:100%;border-radius:.9cqw .9cqw .2cqw .2cqw;display:block;min-height:.6cqh}
+  .bar.op{background:linear-gradient(180deg,var(--indigo-bright),var(--indigo))}
+  .bar.g1{background:var(--g1)} .bar.g2{background:var(--g2)} .bar.g3{background:var(--g3)}
+  .barlabels{display:flex;gap:1.6cqw;margin-top:1.1cqh}
+  .barlab{flex:1;font-size:.98cqw;color:var(--text-soft);font-weight:500;text-align:center;line-height:1.2}
+
+  /* ---- pillar cards (thesis) ---- */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8cqw;margin-top:4cqh}
+  .pcard{background:var(--card);border:1px solid var(--border);border-radius:1.4cqw;padding:2cqw}
+  .pcard .pg{width:2.6cqw;height:2.6cqw;border-radius:.7cqw;background:var(--indigo-soft);border:1px solid var(--indigo-deep);
+    display:flex;align-items:center;justify-content:center;margin-bottom:1.6cqh}
+  .pcard .pg svg{width:1.4cqw;height:1.4cqw;stroke:var(--indigo-bright);fill:none;stroke-width:2}
+  .pcard .pn{font-size:1.55cqw;font-weight:700;color:var(--text);margin-bottom:.7cqh;letter-spacing:-.01em}
+  .pcard .pd{font-size:1.08cqw;color:var(--text-soft);line-height:1.45}
+
+  /* ---- moat stack ---- */
+  .stack{display:flex;flex-direction:column;gap:1.2cqh}
+  .layer{border-radius:1.1cqw;padding:1.7cqw 2cqw;display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border)}
+  .layer.l1{background:var(--card)}
+  .layer.l2{background:var(--card-2)}
+  .layer.l3{background:linear-gradient(120deg,var(--indigo),var(--indigo-deep));border-color:transparent;box-shadow:0 14px 40px -20px rgba(91,108,240,.7)}
+  .layer .lt{font-size:1.5cqw;font-weight:700;letter-spacing:-.01em}
+  .layer .ls{font-size:1.05cqw;font-weight:400;margin-top:.4cqh;color:var(--text-soft)}
+  .layer.l3 .lt,.layer.l3 .ls{color:#fff}.layer.l3 .ls{color:rgba(255,255,255,.82)}
+  .layer .lb{font-size:.96cqw;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-faint);white-space:nowrap}
+  .layer.l3 .lb{color:rgba(255,255,255,.85)}
+
+  /* ---- dot grid ---- */
+  .dotgrid{display:grid;grid-template-columns:repeat(10,1fr);gap:.62cqw;width:18cqw}
+  .dotgrid i{aspect-ratio:1;border-radius:50%;background:var(--g1)}
+  .dotgrid i.on{background:var(--indigo)}
+
+  /* ---- scorecard ---- */
+  .score{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;border:1px solid var(--border);border-radius:1.3cqw;overflow:hidden}
+  .score>div{padding:1.45cqh 1.5cqw;display:flex;align-items:center;border-bottom:1px solid var(--border-soft)}
+  .score .hd{font-size:1.12cqw;font-weight:700;color:var(--text);background:var(--card-2)}
+  .score .hd.bank{background:linear-gradient(120deg,var(--indigo),var(--indigo-deep));color:#fff;justify-content:center}
+  .score .hd.col{justify-content:center;color:var(--text-soft);font-weight:600}
+  .score .rl{font-size:1.12cqw;color:var(--text-soft);font-weight:500}
+  .score .cell{justify-content:center}
+  .score .cell.bank{background:var(--indigo-soft)}
+  .score>div:nth-last-child(-n+4){border-bottom:none}
+  .dots{display:flex;gap:.5cqw}
+  .dots i{width:.85cqw;height:.85cqw;border-radius:50%;border:1px solid var(--g3)}
+  .dots i.f{background:var(--g3);border-color:var(--g3)}
+  .dots i.fi{background:var(--indigo);border-color:var(--indigo)}
+  .dots i.fr{background:var(--rose);border-color:var(--rose)}
+
+  /* ---- numbered checklist ---- */
+  .checks{display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw 3cqw}
+  .chk{display:flex;gap:1.4cqw;align-items:flex-start}
+  .chk .num{flex:none;width:3cqw;height:3cqw;border-radius:50%;background:var(--indigo-soft);border:1px solid var(--indigo-deep);
+    color:var(--indigo-bright);font-weight:800;font-size:1.4cqw;display:flex;align-items:center;justify-content:center}
+  .chk .ct{font-size:1.45cqw;font-weight:600;color:var(--text);line-height:1.32}
+  .chk .cs{font-size:1.05cqw;color:var(--text-soft);margin-top:.5cqh;font-weight:400;line-height:1.4}
+
+  /* ---- risk cards ---- */
+  .rcards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8cqw}
+  .rcard{background:var(--card);border:1px solid var(--border);border-radius:1.4cqw;padding:2.1cqw;border-top:2.5px solid var(--rose)}
+  .rcard .rt{font-size:1.55cqw;font-weight:700;color:var(--text);margin-bottom:1cqh;letter-spacing:-.01em}
+  .rcard .rd{font-size:1.08cqw;color:var(--text-soft);line-height:1.5}
+  .rcard.pos{border-top-color:var(--indigo)}
+
+  /* ---- thesis statement ---- */
+  .ts-setup{font-size:2.4cqw;line-height:1.32;color:var(--text);max-width:34ch;font-weight:500;letter-spacing:-.012em}
+  .ts-punch{font-size:5cqw;line-height:1;color:var(--indigo-bright);font-weight:800;letter-spacing:-.035em;margin-top:1.8cqh}
+
+  /* ---- scale gap ---- */
+  .gap-wrap{display:flex;align-items:flex-end;gap:4cqw;height:30cqh}
+  .gap-big{flex:none;width:26cqw;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .gap-big .bar{width:100%;flex:1;border-radius:1cqw 1cqw .3cqw .3cqw;background:linear-gradient(180deg,var(--indigo-bright),var(--indigo-deep));
+    display:flex;align-items:flex-start;justify-content:center;padding-top:2cqh}
+  .gap-big .bar .v{color:#fff;font-weight:800;font-size:2.6cqw;letter-spacing:-.04em}
+  .gap-small{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .gap-small .dot{width:2.6cqw;height:2.6cqw;border-radius:50%;background:var(--g2);margin-bottom:.6cqh}
+  .gap-cap{font-size:1.02cqw;color:var(--text-soft);margin-top:1.1cqh;text-align:center;font-weight:500;line-height:1.3}
+
+  /* svg text inherits font */
+  svg text{font-family:var(--font)}
+
+  /* quote */
+  .quote{font-size:1.7cqw;font-weight:500;color:var(--text);line-height:1.4;letter-spacing:-.01em;max-width:54ch}
+  .quote .em{color:var(--indigo-bright);font-weight:700}
+
+  /* ---- nav ---- */
+  .navzone{position:absolute;top:0;bottom:0;width:18%;z-index:20;cursor:pointer}
+  .navzone.prev{left:0}.navzone.next{right:0}
+  .navbar{position:absolute;right:2.4cqw;bottom:2cqh;z-index:25;display:flex;align-items:center;gap:1.1cqw;
+    background:var(--card);border:1px solid var(--border);border-radius:999px;padding:.7cqh 1cqw}
+  .chev{width:2.4cqw;height:2.4cqw;min-width:22px;min-height:22px;border-radius:50%;border:none;background:transparent;color:var(--text-soft);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .chev:hover{background:var(--indigo-soft);color:var(--indigo-bright)}
+  .chev svg{width:1.2cqw;height:1.2cqw;min-width:12px;min-height:12px;stroke:currentColor;fill:none;stroke-width:2.4}
+  .counter{font-size:1.02cqw;font-weight:600;color:var(--text-soft);font-variant-numeric:tabular-nums;letter-spacing:.04em;min-width:5cqw;text-align:center}
+  .counter b{color:var(--text)}
+  .chev:focus-visible,.navzone:focus-visible{outline:2px solid var(--indigo-bright);outline-offset:2px}
+  .hint{font-size:.92cqw;color:var(--text-faint);font-weight:500;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="deck" id="deck">
+    <div class="progress" id="progress"></div>
+
+    <!-- 1 — COVER -->
+    <section class="slide active" data-i="1">
+      <div class="ctop"><span class="kicker">Talent Thesis · No. 02</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <div class="two wideR" style="align-items:center">
+          <div>
+            <h1 class="h xl">The Boring<br><span class="ac">Revolution.</span></h1>
+            <div class="lead" style="margin-top:2.6cqh;font-size:1.7cqw;max-width:30ch">Why India's best new designers should bet on banks — not startups, not big tech.</div>
+            <div class="pillrow" style="margin-top:3.2cqh">
+              <span class="pill">Class of 2026</span><span class="pill">India</span><span class="pill">Design careers</span>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="pn">≈50<span class="u">%</span></div>
+            <div class="plab">of the planet's real-time payments clear on rails India's banks run.</div>
+            <div class="psub">Source: NPCI · ACI Worldwide, 2025</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span class="hint">← / → to navigate</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 2 — THESIS -->
+    <section class="slide" data-i="2">
+      <div class="ctop"><span class="kicker">The Thesis</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <div class="ts-setup">For a designer entering the market in 2026, the asymmetric bet isn't a startup or big tech.</div>
+        <div class="ts-punch">It's a bank.</div>
+        <div class="pillars">
+          <div class="pcard">
+            <div class="pg"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 7-8"/><path d="M16 7h4v4"/></svg></div>
+            <div class="pn">Scale today</div>
+            <div class="pd">Apps that already serve hundreds of millions — not a someday million.</div>
+          </div>
+          <div class="pcard">
+            <div class="pg"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg></div>
+            <div class="pn">Stability</div>
+            <div class="pd">Licences and rails that don't vanish in a funding winter.</div>
+          </div>
+          <div class="pcard">
+            <div class="pg"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
+            <div class="pn">Room to shape</div>
+            <div class="pd">Design maturity is low — early designers set the standard.</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>The Boring Revolution</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 3 — DIVIDER: PART ONE -->
+    <section class="slide" data-i="3">
+      <div class="ctop"><span class="kicker">Part One — The Risk</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <div class="two" style="align-items:center">
+          <div>
+            <h2 class="h lg">The default paths<br>are breaking.</h2>
+            <div class="lead" style="margin-top:2.4cqh">Why the "rocketship" and the "bunker" both wobble in 2026.</div>
+          </div>
+          <div class="card">
+            <div class="calls"><div class="call" style="border:none;padding:0">
+              <div class="bignum acc" style="font-size:5.2cqw">28,600</div>
+              <div class="call desc" style="margin-top:1.2cqh;font-size:1.25cqw">Indian startups shut down across 2023–24 — roughly 12× the prior four-year run-rate.</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>01 · The Risk</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 4 — INVERTED LADDER -->
+    <section class="slide" data-i="4">
+      <div class="ctop"><span class="kicker">The Risk · Reframe</span><span class="mark">Meridian</span></div>
+      <div class="body top">
+        <h2 class="h md" style="margin-bottom:1cqh;max-width:26ch">The prestige ladder is upside down.</h2>
+        <div class="lead" style="margin-bottom:1cqh">Where the safe, high-status seat used to be — and where it actually is now.</div>
+        <svg viewBox="0 0 900 340" style="width:100%;height:auto" role="img" aria-label="Between 2021 and 2026 banks rise from least to most desirable while startups fall from most to least desirable; big tech stays roughly flat">
+          <line x1="160" y1="78" x2="804" y2="78" stroke="#202840" stroke-width="1"/>
+          <line x1="160" y1="296" x2="804" y2="296" stroke="#202840" stroke-width="1"/>
+          <g fill="#6E768E" font-size="12" font-weight="700" letter-spacing="1.2">
+            <text x="14" y="74">MORE DESIRABLE</text>
+            <text x="14" y="301">LESS DESIRABLE</text>
+          </g>
+          <g fill="#828AA2" font-size="15" font-weight="600" text-anchor="middle"><text x="180" y="36">2021</text><text x="784" y="36">2026</text></g>
+          <path d="M180,182 C420,190 560,198 720,206" fill="none" stroke="#414B70" stroke-width="2.6" stroke-dasharray="2 8" stroke-linecap="round"/>
+          <path d="M180,90 C440,114 560,250 784,290" fill="none" stroke="#EF8AA0" stroke-width="3.2"/>
+          <path d="M180,290 C440,266 560,114 784,90" fill="none" stroke="#5B6CF0" stroke-width="3.6"/>
+          <circle cx="180" cy="90" r="6" fill="#EF8AA0"/><circle cx="180" cy="290" r="6" fill="#5B6CF0"/>
+          <circle cx="784" cy="290" r="6.5" fill="#EF8AA0"/><circle cx="784" cy="90" r="7.5" fill="#5B6CF0"/>
+          <text x="744" y="212" fill="#828AA2" font-size="14" font-weight="600">Big tech</text>
+          <text x="810" y="86" fill="#8E9BF5" font-size="15.5" font-weight="700">Banks</text>
+          <text x="810" y="296" fill="#EF8AA0" font-size="15.5" font-weight="700">Startups</text>
+        </svg>
+        <div class="lead" style="margin-top:1.6cqh;font-size:1.25cqw;max-width:none">The seat everyone fought for is cooling; the one nobody wanted is heating up — while big tech just drifts sideways.</div>
+      </div>
+      <div class="foot"><span>01 · The Risk</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 5 — STARTUP MIRAGE -->
+    <section class="slide" data-i="5">
+      <div class="ctop"><span class="kicker">The Risk · Startups</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">The startup boom was a 2021 mirage.</h2>
+        <div class="two even" style="align-items:stretch">
+          <div class="card">
+            <div class="lead" style="font-size:1.12cqw;margin-bottom:1.8cqh;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600">Indian startup shutdowns / year</div>
+            <div class="barchart">
+              <div class="barcol"><div class="barval">≈2.4K</div><span class="bar g1" style="height:12%"></span></div>
+              <div class="barcol"><div class="barval neg">15,921</div><span class="bar g3" style="height:82%"></span></div>
+              <div class="barcol"><div class="barval">12,717</div><span class="bar g2" style="height:66%"></span></div>
+            </div>
+            <div class="barlabels"><div class="barlab">'19–'22 avg/yr</div><div class="barlab">2023</div><div class="barlab">2024</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.6cqh">
+            <div class="card tight" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+              <div style="display:flex;align-items:baseline;gap:1cqw"><span class="bignum" style="font-size:2.5cqw;font-weight:700;letter-spacing:-.018em">$22B</span><span style="font-size:1.5cqw;color:var(--text-faint);font-weight:500">&rarr;</span><span class="bignum neg" style="font-size:2.5cqw;font-weight:700;letter-spacing:-.018em">&#8377;0</span></div>
+              <div class="lead" style="font-size:1.08cqw;margin-top:1cqh">Byju's, once India's most valuable startup — its founder later called it "worth zero."</div>
+            </div>
+            <div class="card tight" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+              <div class="bignum neg" style="font-size:2.5cqw;font-weight:700;letter-spacing:-.018em">&minus;85<span class="u" style="font-weight:600">%</span></div>
+              <div class="lead" style="font-size:1.08cqw;margin-top:1cqh">Edtech funding collapse — $4.1B in 2021 down to ~$0.6B in 2024.</div>
+            </div>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:2.6cqh;font-size:1.5cqw">2021 was the anomaly. <span class="em">This is the reality.</span></div>
+      </div>
+      <div class="foot"><span>01 · The Risk &nbsp;·&nbsp; Source: Inc42, Business Standard</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 6 — BIG TECH -->
+    <section class="slide" data-i="6">
+      <div class="ctop"><span class="kicker">The Risk · Big Tech</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:30ch">Big tech isn't the floor either.</h2>
+        <div class="two even" style="align-items:stretch">
+          <div class="card">
+            <div class="lead" style="font-size:1.12cqw;margin-bottom:1.8cqh;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600">Global tech layoffs</div>
+            <div class="barchart">
+              <div class="barcol"><div class="barval">264K</div><span class="bar g3" style="height:82%"></span></div>
+              <div class="barcol"><div class="barval">153K</div><span class="bar g2" style="height:48%"></span></div>
+              <div class="barcol"><div class="barval">123K</div><span class="bar g1" style="height:38%"></span></div>
+              <div class="barcol"><div class="barval">≈150K</div><span class="bar g2" style="height:47%"></span></div>
+            </div>
+            <div class="barlabels"><div class="barlab">2023</div><div class="barlab">2024</div><div class="barlab">2025</div><div class="barlab">2026 H1</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;justify-content:center;gap:2.4cqh">
+            <div>
+              <div class="bignum acc" style="font-size:4.4cqw">≈1 in 4</div>
+              <div class="lead" style="font-size:1.25cqw;margin-top:1.2cqh">cuts now framed as <span class="em">AI restructuring</span> — not a dip, a reshape.</div>
+            </div>
+            <div class="quote" style="font-size:1.45cqw">Both defaults are cyclical. <span class="em">The bank is counter-cyclical.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>01 · The Risk &nbsp;·&nbsp; Source: layoffs.fyi, TrueUp</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 7 — DIVIDER: PART TWO -->
+    <section class="slide" data-i="7">
+      <div class="ctop"><span class="kicker">Part Two — The Opportunity</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <div class="two" style="align-items:center">
+          <div>
+            <h2 class="h lg">India quietly<br>built the rails.</h2>
+            <div class="lead" style="margin-top:2.4cqh">The biggest thing in global payments runs straight through its banks.</div>
+          </div>
+          <div class="card">
+            <div class="calls"><div class="call" style="border:none;padding:0">
+              <div class="bignum acc" style="font-size:5cqw">₹300<span class="u">L cr</span></div>
+              <div class="call desc" style="margin-top:1.2cqh;font-size:1.25cqw">moved over UPI in 2025 — about ten times India's annual federal budget.</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>02 · The Opportunity</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 8 — UPI HERO (img1 layout) -->
+    <section class="slide" data-i="8">
+      <div class="ctop"><span class="kicker">The Opportunity · UPI</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">The hockey stick that ate Indian payments.</h2>
+        <div class="two even" style="align-items:stretch">
+          <div class="card" style="display:flex;flex-direction:column">
+            <div class="lead" style="font-size:1.12cqw;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:1.2cqh">Annual UPI volume (transactions)</div>
+            <svg viewBox="0 0 600 250" style="width:100%;height:auto;flex:1" role="img" aria-label="Exponential growth of annual UPI transaction volume from 2017 to 2025 reaching 228 billion">
+              <defs><linearGradient id="ug" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#5B6CF0" stop-opacity=".34"/><stop offset="1" stop-color="#5B6CF0" stop-opacity="0"/>
+              </linearGradient></defs>
+              <path d="M40,232 L168,224 L296,199 L424,128 L520,79 L568,28 L568,240 L40,240 Z" fill="url(#ug)"/>
+              <path d="M40,232 L168,224 L296,199 L424,128 L520,79 L568,28" fill="none" stroke="#5B6CF0" stroke-width="3.4" stroke-linejoin="round"/>
+              <circle cx="520" cy="79" r="5" fill="#5B6CF0"/><text x="520" y="66" text-anchor="middle" font-size="15" font-weight="700" fill="#EEF0F7">172B</text>
+              <circle cx="568" cy="28" r="6.5" fill="#5B6CF0"/><text x="568" y="18" text-anchor="end" font-size="18" font-weight="800" fill="#8E9BF5">228B</text>
+            </svg>
+            <div class="pillrow" style="margin-top:1.4cqh;justify-content:space-between"><span class="pill">2017</span><span class="pill">2021</span><span class="pill">2025</span></div>
+          </div>
+          <div class="panel">
+            <div class="pn">228<span class="u">B</span></div>
+            <div class="plab">UPI transactions cleared in 2025.</div>
+            <div class="psub">21.6B in December alone · ~12,000× since 2017</div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: NPCI, PIB</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 9 — UPI MARKET -->
+    <section class="slide" data-i="9">
+      <div class="ctop"><span class="kicker">The Opportunity · Scale</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.8cqh;max-width:36ch">India runs the largest real-time payment system on Earth.</h2>
+        <div class="two" style="align-items:center">
+          <div style="display:flex;flex-direction:column;align-items:center">
+            <svg viewBox="0 0 220 220" style="width:20cqw;height:auto" role="img" aria-label="India accounts for about half of the world's real-time payment transactions">
+              <circle cx="110" cy="110" r="86" fill="none" stroke="#262D45" stroke-width="20"/>
+              <circle cx="110" cy="110" r="86" fill="none" stroke="#5B6CF0" stroke-width="20" stroke-linecap="round"
+                stroke-dasharray="270 540" transform="rotate(-90 110 110)"/>
+              <text x="110" y="104" text-anchor="middle" font-size="46" font-weight="800" fill="#8E9BF5" letter-spacing="-2">≈50%</text>
+              <text x="110" y="130" text-anchor="middle" font-size="14" font-weight="500" fill="#9AA2B8">of world volume</text>
+            </svg>
+            <div class="gap-cap" style="margin-top:1.2cqh;font-size:1.05cqw">India vs. the entire rest of the world</div>
+          </div>
+          <div class="calls">
+            <div class="call">
+              <div class="top"><span class="n">+33<span class="u">%</span></span><span class="tag">Volume growth<br>in a single year</span></div>
+              <div class="desc">172B → 228B transactions, year on year.</div>
+            </div>
+            <div class="call">
+              <div class="top"><span class="n">1B<span class="u">/day</span></span><span class="tag">Projected<br>by FY27 (PwC)</span></div>
+              <div class="desc">From roughly 0.7B per day today.</div>
+            </div>
+            <div class="quote" style="font-size:1.5cqw;border:none">And every rupee of it <span class="em">settles through banks.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: NPCI, ACI Worldwide, PwC</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 10 — ICICI SCALE GAP -->
+    <section class="slide" data-i="10">
+      <div class="ctop"><span class="kicker">The Opportunity · One Bank</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2cqh;max-width:36ch">One bank's app already serves the users a startup only dreams of.</h2>
+        <div class="two even" style="align-items:flex-end">
+          <div class="gap-wrap">
+            <div class="gap-big"><div class="bar"><span class="v">558M</span></div><div class="gap-cap">iMobile transactions<br>FY25 (one bank)</div></div>
+            <div class="gap-small"><div class="dot"></div><div class="gap-cap">≈1M<br>a startup hopes for</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.4cqh;align-self:center">
+            <div class="statchip" style="font-size:1.3cqw"><b>₹11.2T</b><span class="sep"></span>value moved in FY25</div>
+            <div class="statchip" style="font-size:1.3cqw"><b>18M</b><span class="sep"></span>active credit cards</div>
+            <div class="statchip" style="font-size:1.3cqw"><b>400+</b><span class="sep"></span>services in one app</div>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:2.6cqh;font-size:1.5cqw">Hundreds of millions <span class="em">today</span> — against a hoped-for million <span class="subtle">someday.</span></div>
+      </div>
+      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: ICICI Bank Annual Report FY2025</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 11 — MOAT -->
+    <section class="slide" data-i="11">
+      <div class="ctop"><span class="kicker">The Opportunity · The Moat</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">Fintechs are tenants. Banks own the building.</h2>
+        <div class="stack">
+          <div class="layer l1"><div><div class="lt">The consumer app</div><div class="ls">Slick UI, brand, growth — and entirely replaceable.</div></div><div class="lb">Layer 1 · replaceable</div></div>
+          <div class="layer l2"><div><div class="lt">The rails — NPCI / UPI</div><div class="ls">The pipes every app rides on, owned by the banks.</div></div><div class="lb">Layer 2 · bank-owned</div></div>
+          <div class="layer l3"><div><div class="lt">The bank &amp; the licence</div><div class="ls">Regulated trust no fintech can replicate overnight.</div></div><div class="lb">Layer 3 · the moat</div></div>
+        </div>
+        <div class="lead" style="margin-top:2.4cqh;font-size:1.25cqw;max-width:none">When the RBI cancelled Paytm Payments Bank's licence, Paytm was forced onto <span class="em">Axis &amp; Yes Bank</span> rails overnight.</div>
+      </div>
+      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: RBI orders, Business Standard</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 12 — HIRING + ROI -->
+    <section class="slide" data-i="12">
+      <div class="ctop"><span class="kicker">The Opportunity · Designers</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.6cqh;max-width:36ch">Banks are hiring designers — and they're early.</h2>
+        <div class="two even" style="align-items:center">
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:1.6cqh">
+            <div class="dotgrid" id="dotgrid"></div>
+            <div class="lead" style="font-size:1.15cqw">Only <span class="em">~10%</span> of firms reach top-tier design maturity — fewer still in banking. The runway is wide open.</div>
+          </div>
+          <div class="calls">
+            <div class="call">
+              <div class="top"><span class="n">+27<span class="u">%</span></span><span class="tag">Revenue, over<br>five years</span></div>
+              <div class="desc">Top-quartile, design-led retail banks (McKinsey).</div>
+            </div>
+            <div class="call">
+              <div class="top"><span class="n">+18<span class="u">%</span></span><span class="tag">Total returns<br>to shareholders</span></div>
+              <div class="desc">Same cohort — design compounds on the balance sheet.</div>
+            </div>
+          </div>
+        </div>
+        <div class="lead" style="margin-top:2cqh;font-size:1.2cqw;max-width:none">Startup = influence, no resources. Big tech = resources, no influence. <span class="em">The right bank = both.</span></div>
+      </div>
+      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: McKinsey, Business Value of Design</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 13 — DIVIDER: PART THREE -->
+    <section class="slide" data-i="13">
+      <div class="ctop"><span class="kicker">Part Three — The Work</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <div class="two" style="align-items:center">
+          <div>
+            <h2 class="h lg">Forget the logo.<br>Look at the work.</h2>
+            <div class="lead" style="margin-top:2.4cqh">The real reason to take the seat isn't safety — it's what you get to design.</div>
+          </div>
+          <div class="card">
+            <div class="calls"><div class="call" style="border:none;padding:0">
+              <div class="bignum acc" style="font-size:5.4cqw">400+</div>
+              <div class="call desc" style="margin-top:1.2cqh;font-size:1.25cqw">live journeys inside a single banking app — your design surface from day one.</div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>03 · The Work</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 14 — SCALE -->
+    <section class="slide" data-i="14">
+      <div class="ctop"><span class="kicker">The Work · Scale</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">Your smallest change, multiplied by millions.</h2>
+        <div class="two" style="align-items:center">
+          <div>
+            <div class="lead" style="font-size:1.5cqw;max-width:42ch">There's no quiet sandbox. The day you ship, your decision is in hundreds of millions of hands — half a second of friction becomes a national problem, and a clearer screen becomes a national win.</div>
+            <div class="pillrow" style="margin-top:3cqh">
+              <span class="statchip" style="font-size:1.25cqw"><b>≈700M</b><span class="sep"></span>payments clear every single day</span>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;align-items:center">
+            <svg viewBox="0 0 320 320" style="width:18cqw;height:auto" role="img" aria-label="One design decision rippling outward to hundreds of millions of users">
+              <circle cx="160" cy="150" r="118" fill="none" stroke="#5B6CF0" stroke-width="1.5" opacity=".16"/>
+              <circle cx="160" cy="150" r="86" fill="none" stroke="#5B6CF0" stroke-width="1.5" opacity=".3"/>
+              <circle cx="160" cy="150" r="54" fill="none" stroke="#5B6CF0" stroke-width="2" opacity=".55"/>
+              <circle cx="160" cy="150" r="26" fill="#5B6CF0"/>
+              <text x="160" y="158" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">1</text>
+              <text x="160" y="304" text-anchor="middle" font-size="14" font-weight="600" fill="#8E9BF5">one change → hundreds of millions</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="foot"><span>03 · The Work &nbsp;·&nbsp; Source: NPCI (Dec 2025 UPI)</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 15 — STAKES -->
+    <section class="slide" data-i="15">
+      <div class="ctop"><span class="kicker">The Work · Stakes</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.8cqh;max-width:30ch">The highest-stakes canvas in the country.</h2>
+        <div class="rcards">
+          <div class="rcard pos"><div class="rt">Clarity beats clever</div><div class="rd">When the screen holds someone's salary and savings, the boldest move is making it unmistakable.</div></div>
+          <div class="rcard pos"><div class="rt">Error states matter most</div><div class="rd">The screen that quietly stops a wrong transfer is the work no one thanks you for — and the work that counts.</div></div>
+          <div class="rcard pos"><div class="rt">Trust is the metric</div><div class="rd">Not time-on-app or streaks. Did they feel safe moving their money — and were they right to?</div></div>
+        </div>
+        <div class="lead" style="margin-top:2.8cqh;font-size:1.25cqw;max-width:none">A confusing flow here isn't a bounce — it's real harm. That raises the bar on <span class="em">every</span> decision you make.</div>
+      </div>
+      <div class="foot"><span>03 · The Work</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 16 — THE BRIEFS -->
+    <section class="slide" data-i="16">
+      <div class="ctop"><span class="kicker">The Work · The Briefs</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:3cqh;max-width:32ch">Problems no startup can hand you.</h2>
+        <div class="checks">
+          <div class="chk"><div class="num">1</div><div><div class="ct">Bring the next 100M online</div><div class="cs">First-time digital users graduating from cash and feature phones.</div></div></div>
+          <div class="chk"><div class="num">2</div><div><div class="ct">Design for India's real conditions</div><div class="cs">A dozen languages, low literacy, ₹8,000 phones, patchy networks.</div></div></div>
+          <div class="chk"><div class="num">3</div><div><div class="ct">Make high-stakes feel simple</div><div class="cs">A loan, a dispute, a KYC check — safe and clear in a few taps.</div></div></div>
+          <div class="chk"><div class="num">4</div><div><div class="ct">Turn regulation into craft</div><div class="cs">Hard constraints that sharpen design — like accessibility or performance budgets.</div></div></div>
+        </div>
+        <div class="lead" style="margin-top:3cqh;font-size:1.25cqw;max-width:none">A startup can't give you these and big tech won't — <span class="em">because only a bank owns them.</span></div>
+      </div>
+      <div class="foot"><span>03 · The Work</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 17 — VERDICT -->
+    <section class="slide" data-i="17">
+      <div class="ctop"><span class="kicker">The Verdict</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h lg" style="max-width:18ch">Build on the <span class="ac">rails</span>,<br>not the runway.</h2>
+        <div class="lead" style="margin-top:3cqh;font-size:1.85cqw;max-width:42ch">A startup asks you to bet on its survival. A bank lets you bet on India's.</div>
+      </div>
+      <div class="foot"><span>The Boring Revolution</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 18 — CLOSE -->
+    <section class="slide" data-i="18">
+      <div class="ctop"><span class="kicker">Close</span><span class="mark">Meridian</span></div>
+      <div class="body">
+        <h2 class="h md" style="max-width:22ch">You're <span class="ac">early</span> — not late.</h2>
+        <div class="lead" style="margin-top:2.4cqh;font-size:1.5cqw;max-width:52ch">Still deciding where to go? Interview at the bank you've been ignoring. Already joined one? You're ahead of the field — most of the market just hasn't done the math yet.</div>
+        <div class="card" style="margin-top:2.8cqh;padding:2cqw 2.4cqw">
+          <div class="lead" style="font-size:.98cqw;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:1.2cqh">Sources</div>
+          <div class="lead" style="font-size:1.02cqw;line-height:1.7;max-width:none;color:var(--text-soft)">NPCI &amp; PIB (UPI volumes) · ACI Worldwide (global real-time payments share) · PwC (FY27 projection) · ICICI Bank Annual Report FY2025 · Inc42 &amp; Business Standard (startup shutdowns, edtech funding) · layoffs.fyi &amp; TrueUp (global tech layoffs) · RBI orders (Paytm Payments Bank) · McKinsey, "The Business Value of Design."</div>
+        </div>
+        <div class="lead" style="margin-top:2cqh;font-size:.98cqw;color:var(--text-faint)">"Meridian" is an illustrative fund identity — swap for your own branding.</div>
+      </div>
+      <div class="foot"><span>The Boring Revolution · Talent Thesis No. 02</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- nav -->
+    <div class="navzone prev" id="prevzone" aria-label="Previous slide" role="button" tabindex="-1"></div>
+    <div class="navzone next" id="nextzone" aria-label="Next slide" role="button" tabindex="-1"></div>
+    <div class="navbar">
+      <button class="chev" id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <span class="counter"><b id="cur">01</b> / 18</span>
+      <button class="chev" id="next" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var total = slides.length, i = 0;
+    var prog = document.getElementById('progress');
+    var cur = document.getElementById('cur');
+    var pagenos = document.querySelectorAll('.pageno');
+
+    // build dot grid (slide 12): 100 dots, 10 on
+    var dg = document.getElementById('dotgrid');
+    if(dg){ for(var d=0;d<100;d++){ var el=document.createElement('i'); if(d<10) el.className='on'; dg.appendChild(el);} }
+
+    function pad(n){ return (n<10?'0':'')+n; }
+    function show(n){
+      i = Math.max(0, Math.min(total-1, n));
+      slides.forEach(function(s,idx){ s.classList.toggle('active', idx===i); });
+      prog.style.width = ((i)/(total-1)*100) + '%';
+      cur.textContent = pad(i+1);
+      pagenos.forEach(function(p){ p.textContent = pad(i+1)+' / '+total; });
+    }
+    function next(){ show(i+1); }
+    function prev(){ show(i-1); }
+
+    document.getElementById('next').addEventListener('click', next);
+    document.getElementById('prev').addEventListener('click', prev);
+    document.getElementById('nextzone').addEventListener('click', next);
+    document.getElementById('prevzone').addEventListener('click', prev);
+
+    document.addEventListener('keydown', function(e){
+      if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); next(); }
+      else if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); prev(); }
+      else if(e.key==='Home'){ e.preventDefault(); show(0); }
+      else if(e.key==='End'){ e.preventDefault(); show(total-1); }
+    });
+
+    // touch
+    var x0=null;
+    document.addEventListener('touchstart', function(e){ x0=e.touches[0].clientX; }, {passive:true});
+    document.addEventListener('touchend', function(e){
+      if(x0===null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if(Math.abs(dx)>45){ dx<0 ? next() : prev(); }
+      x0=null;
+    }, {passive:true});
+
+    show(0);
+  })();
+</script>
+</body>
+</html>
