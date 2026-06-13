@@ -249,6 +249,25 @@
   .counter b{color:var(--text)}
   .chev:focus-visible,.navzone:focus-visible{outline:2px solid var(--indigo-bright);outline-offset:2px}
   .hint{font-size:.92cqw;color:var(--text-faint);font-weight:500;letter-spacing:.04em}
+
+  /* ---- criteria row (decision framework) ---- */
+  .crits{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2cqw;margin-top:3.4cqh}
+  .crit{background:var(--card);border:1px solid var(--border);border-radius:1.2cqw;padding:1.5cqw}
+  .crit .pg{width:2.4cqw;height:2.4cqw;border-radius:.6cqw;background:var(--indigo-soft);border:1px solid var(--indigo-deep);
+    display:flex;align-items:center;justify-content:center;margin-bottom:1.2cqh}
+  .crit .pg svg{width:1.3cqw;height:1.3cqw;stroke:var(--indigo-bright);fill:none;stroke-width:2}
+  .crit .cn{font-size:1.18cqw;font-weight:700;color:var(--text);margin-bottom:.5cqh;letter-spacing:-.01em;line-height:1.15}
+  .crit .cd{font-size:.92cqw;color:var(--text-soft);line-height:1.4}
+
+  /* ---- inline source citation ---- */
+  .src{font-size:.92cqw;color:var(--text-soft);font-weight:500;letter-spacing:.015em;line-height:1.45;margin-top:1.1cqh}
+  .src b{color:var(--text-faint);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:.86em}
+
+  /* ---- responsive fallback for dense grids ---- */
+  @container (max-width: 760px){
+    .crits{grid-template-columns:repeat(2,1fr);gap:1.6cqw}
+    .checks{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
@@ -258,402 +277,398 @@
 
     <!-- 1 — COVER -->
     <section class="slide active" data-i="1">
-      <div class="ctop"><span class="kicker">Talent Thesis · No. 02</span><span class="mark">Meridian</span></div>
+      <div class="ctop"><span class="kicker">Talent Thesis · No. 02</span><span class="mark">Harsh D</span></div>
       <div class="body">
         <div class="two wideR" style="align-items:center">
           <div>
             <h1 class="h xl">The Boring<br><span class="ac">Revolution.</span></h1>
-            <div class="lead" style="margin-top:2.6cqh;font-size:1.7cqw;max-width:30ch">Why India's best new designers should bet on banks — not startups, not big tech.</div>
+            <div class="lead" style="margin-top:2.6cqh;font-size:1.7cqw;max-width:32ch">India's most underrated design canvas isn't a startup or big tech — it's national-scale trust infrastructure. And you're early to it.</div>
             <div class="pillrow" style="margin-top:3.2cqh">
               <span class="pill">Class of 2026</span><span class="pill">India</span><span class="pill">Design careers</span>
             </div>
           </div>
           <div class="panel">
-            <div class="pn">≈50<span class="u">%</span></div>
-            <div class="plab">of the planet's real-time payments clear on rails India's banks run.</div>
-            <div class="psub">Source: NPCI · ACI Worldwide, 2025</div>
+            <div class="pn">≈49<span class="u">%</span></div>
+            <div class="plab">of the world's real-time payments settle through rails India's banks run.</div>
+            <div class="psub">ACI Worldwide · Prime Time for Real-Time 2024 (2023 data)</div>
           </div>
         </div>
       </div>
       <div class="foot"><span class="hint">← / → to navigate</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 2 — THESIS -->
+    <!-- 2 — DECISION FRAMEWORK -->
     <section class="slide" data-i="2">
-      <div class="ctop"><span class="kicker">The Thesis</span><span class="mark">Meridian</span></div>
+      <div class="ctop"><span class="kicker">The Frame</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <div class="ts-setup">For a designer entering the market in 2026, the asymmetric bet isn't a startup or big tech.</div>
-        <div class="ts-punch">It's a bank.</div>
-        <div class="pillars">
-          <div class="pcard">
-            <div class="pg"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 7-8"/><path d="M16 7h4v4"/></svg></div>
-            <div class="pn">Scale today</div>
-            <div class="pd">Apps that already serve hundreds of millions — not a someday million.</div>
-          </div>
-          <div class="pcard">
-            <div class="pg"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg></div>
-            <div class="pn">Stability</div>
-            <div class="pd">Licences and rails that don't vanish in a funding winter.</div>
-          </div>
-          <div class="pcard">
-            <div class="pg"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></div>
-            <div class="pn">Room to shape</div>
-            <div class="pd">Design maturity is low — early designers set the standard.</div>
-          </div>
+        <h2 class="h md" style="max-width:24ch">First, the criteria.<br>Then the bet.</h2>
+        <div class="lead" style="margin-top:1.6cqh;max-width:62ch">Where a designer should go in 2026 isn't a matter of prestige. Judge any role on five things — not the logo on the door.</div>
+        <div class="crits">
+          <div class="crit"><div class="pg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-5 4 3 7-8"/><path d="M16 7h4v4"/></svg></div><div class="cn">Scale of impact</div><div class="cd">How many real people feel your decisions.</div></div>
+          <div class="crit"><div class="pg"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6s7 2 7 5.6"/></svg></div><div class="cn">Team quality</div><div class="cd">Design leadership, researchers, peers to learn from.</div></div>
+          <div class="crit"><div class="pg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h12"/><path d="M13 6l6 6-6 6"/></svg></div><div class="cn">Decision rights</div><div class="cd">Do you ship — or just hand off mockups?</div></div>
+          <div class="crit"><div class="pg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div><div class="cn">Learning velocity</div><div class="cd">How fast you see real impact and feedback.</div></div>
+          <div class="crit"><div class="pg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div><div class="cn">Org leverage</div><div class="cd">Real product power, not token inclusion.</div></div>
         </div>
+        <div class="lead" style="margin-top:3cqh;font-size:1.15cqw;max-width:none">This deck argues a bank can win on these — <span class="em">not that every bank does.</span> Use the criteria; hold the conclusion lightly.</div>
+      </div>
+      <div class="foot"><span>The Frame · choose on criteria, not prestige</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 3 — THESIS -->
+    <section class="slide" data-i="3">
+      <div class="ctop"><span class="kicker">The Thesis</span><span class="mark">Harsh D</span></div>
+      <div class="body">
+        <div class="ts-setup">On those five criteria, for a designer entering the market in 2026, the asymmetric bet isn't a startup or big tech.</div>
+        <div class="ts-punch">It's a bank.</div>
+        <div class="lead" style="margin-top:2.6cqh;font-size:1.4cqw;max-width:48ch">Held with eyes open. Here's the case — <span class="em">and the cost.</span></div>
       </div>
       <div class="foot"><span>The Boring Revolution</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 3 — DIVIDER: PART ONE -->
-    <section class="slide" data-i="3">
-      <div class="ctop"><span class="kicker">Part One — The Risk</span><span class="mark">Meridian</span></div>
+    <!-- 4 — DIVIDER: PART ONE -->
+    <section class="slide" data-i="4">
+      <div class="ctop"><span class="kicker">Part One — The Market</span><span class="mark">Harsh D</span></div>
       <div class="body">
         <div class="two" style="align-items:center">
           <div>
-            <h2 class="h lg">The default paths<br>are breaking.</h2>
-            <div class="lead" style="margin-top:2.4cqh">Why the "rocketship" and the "bunker" both wobble in 2026.</div>
+            <h2 class="h lg">The market is selective —<br>not on fire.</h2>
+            <div class="lead" style="margin-top:2.4cqh">The doom story is a year out of date. Here's the June-2026 reality.</div>
           </div>
           <div class="card">
             <div class="calls"><div class="call" style="border:none;padding:0">
-              <div class="bignum acc" style="font-size:5.2cqw">28,600</div>
-              <div class="call desc" style="margin-top:1.2cqh;font-size:1.25cqw">Indian startups shut down across 2023–24 — roughly 12× the prior four-year run-rate.</div>
+              <div class="bignum acc" style="font-size:5.2cqw">729</div>
+              <div class="call desc" style="margin-top:1.2cqh;font-size:1.25cqw">Indian startup shutdowns in 2025 — a five-year low, down <span style="color:var(--indigo-bright);font-weight:700">81%</span> from 3,903 in 2024.</div>
+              <div class="src"><b>Source</b> · Tracxn / Business Standard, Dec 2025</div>
             </div></div>
           </div>
         </div>
       </div>
-      <div class="foot"><span>01 · The Risk</span><span class="pageno"></span></div>
+      <div class="foot"><span>01 · The Market</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 4 — INVERTED LADDER -->
-    <section class="slide" data-i="4">
-      <div class="ctop"><span class="kicker">The Risk · Reframe</span><span class="mark">Meridian</span></div>
-      <div class="body top">
-        <h2 class="h md" style="margin-bottom:1cqh;max-width:26ch">The prestige ladder is upside down.</h2>
-        <div class="lead" style="margin-bottom:1cqh">Where the safe, high-status seat used to be — and where it actually is now.</div>
-        <svg viewBox="0 0 900 340" style="width:100%;height:auto" role="img" aria-label="Between 2021 and 2026 banks rise from least to most desirable while startups fall from most to least desirable; big tech stays roughly flat">
-          <line x1="160" y1="78" x2="804" y2="78" stroke="#202840" stroke-width="1"/>
-          <line x1="160" y1="296" x2="804" y2="296" stroke="#202840" stroke-width="1"/>
-          <g fill="#6E768E" font-size="12" font-weight="700" letter-spacing="1.2">
-            <text x="14" y="74">MORE DESIRABLE</text>
-            <text x="14" y="301">LESS DESIRABLE</text>
-          </g>
-          <g fill="#828AA2" font-size="15" font-weight="600" text-anchor="middle"><text x="180" y="36">2021</text><text x="784" y="36">2026</text></g>
-          <path d="M180,182 C420,190 560,198 720,206" fill="none" stroke="#414B70" stroke-width="2.6" stroke-dasharray="2 8" stroke-linecap="round"/>
-          <path d="M180,90 C440,114 560,250 784,290" fill="none" stroke="#EF8AA0" stroke-width="3.2"/>
-          <path d="M180,290 C440,266 560,114 784,90" fill="none" stroke="#5B6CF0" stroke-width="3.6"/>
-          <circle cx="180" cy="90" r="6" fill="#EF8AA0"/><circle cx="180" cy="290" r="6" fill="#5B6CF0"/>
-          <circle cx="784" cy="290" r="6.5" fill="#EF8AA0"/><circle cx="784" cy="90" r="7.5" fill="#5B6CF0"/>
-          <text x="744" y="212" fill="#828AA2" font-size="14" font-weight="600">Big tech</text>
-          <text x="810" y="86" fill="#8E9BF5" font-size="15.5" font-weight="700">Banks</text>
-          <text x="810" y="296" fill="#EF8AA0" font-size="15.5" font-weight="700">Startups</text>
-        </svg>
-        <div class="lead" style="margin-top:1.6cqh;font-size:1.25cqw;max-width:none">The seat everyone fought for is cooling; the one nobody wanted is heating up — while big tech just drifts sideways.</div>
-      </div>
-      <div class="foot"><span>01 · The Risk</span><span class="pageno"></span></div>
-    </section>
-
-    <!-- 5 — STARTUP MIRAGE -->
+    <!-- 5 — STARTUPS: CORRECTING, NOT COLLAPSING -->
     <section class="slide" data-i="5">
-      <div class="ctop"><span class="kicker">The Risk · Startups</span><span class="mark">Meridian</span></div>
+      <div class="ctop"><span class="kicker">The Market · Startups</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">The startup boom was a 2021 mirage.</h2>
+        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">Startups are maturing, not dying.</h2>
         <div class="two even" style="align-items:stretch">
           <div class="card">
             <div class="lead" style="font-size:1.12cqw;margin-bottom:1.8cqh;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600">Indian startup shutdowns / year</div>
             <div class="barchart">
-              <div class="barcol"><div class="barval">≈2.4K</div><span class="bar g1" style="height:12%"></span></div>
-              <div class="barcol"><div class="barval neg">15,921</div><span class="bar g3" style="height:82%"></span></div>
-              <div class="barcol"><div class="barval">12,717</div><span class="bar g2" style="height:66%"></span></div>
+              <div class="barcol"><div class="barval neg">3,903</div><span class="bar g3" style="height:84%"></span></div>
+              <div class="barcol"><div class="barval">729</div><span class="bar op" style="height:16%"></span></div>
             </div>
-            <div class="barlabels"><div class="barlab">'19–'22 avg/yr</div><div class="barlab">2023</div><div class="barlab">2024</div></div>
+            <div class="barlabels"><div class="barlab">2024</div><div class="barlab">2025 · 5-yr low</div></div>
+            <div class="src"><b>Source</b> · Tracxn / Business Standard, Dec 2025</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:1.6cqh">
             <div class="card tight" style="flex:1;display:flex;flex-direction:column;justify-content:center">
-              <div style="display:flex;align-items:baseline;gap:1cqw"><span class="bignum" style="font-size:2.5cqw;font-weight:700;letter-spacing:-.018em">$22B</span><span style="font-size:1.5cqw;color:var(--text-faint);font-weight:500">&rarr;</span><span class="bignum neg" style="font-size:2.5cqw;font-weight:700;letter-spacing:-.018em">&#8377;0</span></div>
-              <div class="lead" style="font-size:1.08cqw;margin-top:1cqh">Byju's, once India's most valuable startup — its founder later called it "worth zero."</div>
+              <div class="bignum acc" style="font-size:2.6cqw;font-weight:800">18 IPOs</div>
+              <div class="lead" style="font-size:1.08cqw;margin-top:1cqh">Indian startups went public in 2025 — a record, up from 13 in 2024.</div>
             </div>
             <div class="card tight" style="flex:1;display:flex;flex-direction:column;justify-content:center">
-              <div class="bignum neg" style="font-size:2.5cqw;font-weight:700;letter-spacing:-.018em">&minus;85<span class="u" style="font-weight:600">%</span></div>
-              <div class="lead" style="font-size:1.08cqw;margin-top:1cqh">Edtech funding collapse — $4.1B in 2021 down to ~$0.6B in 2024.</div>
+              <div class="bignum acc" style="font-size:2.6cqw;font-weight:800">11 unicorns</div>
+              <div class="lead" style="font-size:1.08cqw;margin-top:1cqh">Minted in 2025 — up from just 2 in 2023. Capital is selective, not absent.</div>
             </div>
           </div>
         </div>
-        <div class="quote" style="margin-top:2.6cqh;font-size:1.5cqw">2021 was the anomaly. <span class="em">This is the reality.</span></div>
+        <div class="quote" style="margin-top:2.4cqh;font-size:1.45cqw">More selective capital. <span class="em">Still a legitimate — and now more durable — design employer.</span></div>
       </div>
-      <div class="foot"><span>01 · The Risk &nbsp;·&nbsp; Source: Inc42, Business Standard</span><span class="pageno"></span></div>
+      <div class="foot"><span>01 · The Market &nbsp;·&nbsp; Source: Tracxn, Inc42, Business Standard (2025)</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 6 — BIG TECH -->
+    <!-- 6 — NO "SAFE" LOGO -->
     <section class="slide" data-i="6">
-      <div class="ctop"><span class="kicker">The Risk · Big Tech</span><span class="mark">Meridian</span></div>
+      <div class="ctop"><span class="kicker">The Market · No Safe Logo</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:30ch">Big tech isn't the floor either.</h2>
-        <div class="two even" style="align-items:stretch">
-          <div class="card">
-            <div class="lead" style="font-size:1.12cqw;margin-bottom:1.8cqh;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600">Global tech layoffs</div>
-            <div class="barchart">
-              <div class="barcol"><div class="barval">264K</div><span class="bar g3" style="height:82%"></span></div>
-              <div class="barcol"><div class="barval">153K</div><span class="bar g2" style="height:48%"></span></div>
-              <div class="barcol"><div class="barval">123K</div><span class="bar g1" style="height:38%"></span></div>
-              <div class="barcol"><div class="barval">≈150K</div><span class="bar g2" style="height:47%"></span></div>
-            </div>
-            <div class="barlabels"><div class="barlab">2023</div><div class="barlab">2024</div><div class="barlab">2025</div><div class="barlab">2026 H1</div></div>
+        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:30ch">There is no "safe" logo anymore.</h2>
+        <div class="two even" style="align-items:center">
+          <div class="card" style="display:flex;flex-direction:column;justify-content:center">
+            <div class="bignum neg" style="font-size:4.4cqw">−23,460</div>
+            <div class="lead" style="font-size:1.2cqw;margin-top:1.2cqh">net jobs cut by <span class="neg">TCS</span> in FY26 — India's largest IT employer, the default "safe" graduate job. (~12,200 announced July 2025, ~2% of a 613K workforce.)</div>
+            <div class="src"><b>Source</b> · Moneycontrol & company filings, 2025–26</div>
           </div>
-          <div style="display:flex;flex-direction:column;justify-content:center;gap:2.4cqh">
-            <div>
-              <div class="bignum acc" style="font-size:4.4cqw">≈1 in 4</div>
-              <div class="lead" style="font-size:1.25cqw;margin-top:1.2cqh">cuts now framed as <span class="em">AI restructuring</span> — not a dip, a reshape.</div>
+          <div style="display:flex;flex-direction:column;justify-content:center;gap:1.6cqh">
+            <div class="statchip" style="font-size:1.25cqw"><b>≈246K</b><span class="sep"></span>global tech layoffs in 2025</div>
+            <div class="statchip" style="font-size:1.25cqw"><b>≈150K</b><span class="sep"></span>more in 2026, H1 alone</div>
+            <div class="statchip" style="font-size:1.25cqw"><b>~20%→~40%</b><span class="sep"></span>of cuts tied to AI (Q1→May '26)</div>
+            <div class="src" style="margin-top:.2cqh"><b>Source</b> · TrueUp (global), 2026</div>
+          </div>
+        </div>
+        <div class="quote" style="margin-top:2.4cqh;font-size:1.45cqw">You don't de-risk with a logo. <span class="em">You de-risk with craft — and a deliberate choice of where leverage sits.</span></div>
+      </div>
+      <div class="foot"><span>01 · The Market</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 7 — WHERE DESIGN DEMAND ACTUALLY IS -->
+    <section class="slide" data-i="7">
+      <div class="ctop"><span class="kicker">The Market · Demand</span><span class="mark">Harsh D</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2cqh;max-width:34ch">Be honest about where design jobs are.</h2>
+        <div class="two even" style="align-items:center">
+          <div class="card">
+            <div class="lead" style="font-size:1.12cqw;margin-bottom:1.8cqh;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600">Where design hiring concentrates</div>
+            <div class="barchart" style="height:20cqh">
+              <div class="barcol"><div class="barval">Product</div><span class="bar op" style="height:100%"></span></div>
+              <div class="barcol"><div class="barval">Fintech</div><span class="bar g3" style="height:80%"></span></div>
+              <div class="barcol"><div class="barval">GCCs</div><span class="bar g3" style="height:64%"></span></div>
+              <div class="barcol"><div class="barval">Services</div><span class="bar g2" style="height:42%"></span></div>
+              <div class="barcol"><div class="barval">Banks</div><span class="bar g1" style="height:28%"></span></div>
             </div>
-            <div class="quote" style="font-size:1.45cqw">Both defaults are cyclical. <span class="em">The bank is counter-cyclical.</span></div>
+            <div class="src"><b>Note</b> · Relative design-hiring concentration, 2025 aggregate</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1.4cqh">
+            <div class="lead" style="font-size:1.2cqw;max-width:34ch">A bank is <span class="em">not</span> the obvious demand center. That's the point — fewer designers means more room to shape the function.</div>
+            <div class="statchip" style="font-size:1.18cqw"><b>29.1%</b><span class="sep"></span>graduate unemployment vs 3.1% headline</div>
+            <div class="statchip" style="font-size:1.18cqw"><b>₹3–28 LPA</b><span class="sep"></span>design pay: Jr 3–6 · Mid 8–15 · Sr 15–28</div>
+            <div class="src"><b>Source</b> · ILO/IHD India Employment Report 2024; comp aggregate 2025</div>
           </div>
         </div>
       </div>
-      <div class="foot"><span>01 · The Risk &nbsp;·&nbsp; Source: layoffs.fyi, TrueUp</span><span class="pageno"></span></div>
+      <div class="foot"><span>01 · The Market</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 7 — DIVIDER: PART TWO -->
-    <section class="slide" data-i="7">
-      <div class="ctop"><span class="kicker">Part Two — The Opportunity</span><span class="mark">Meridian</span></div>
+    <!-- 8 — DIVIDER: PART TWO -->
+    <section class="slide" data-i="8">
+      <div class="ctop"><span class="kicker">Part Two — The Canvas</span><span class="mark">Harsh D</span></div>
       <div class="body">
         <div class="two" style="align-items:center">
           <div>
-            <h2 class="h lg">India quietly<br>built the rails.</h2>
+            <h2 class="h lg">India built the rails.<br>Quietly. At planet scale.</h2>
             <div class="lead" style="margin-top:2.4cqh">The biggest thing in global payments runs straight through its banks.</div>
           </div>
           <div class="card">
             <div class="calls"><div class="call" style="border:none;padding:0">
-              <div class="bignum acc" style="font-size:5cqw">₹300<span class="u">L cr</span></div>
-              <div class="call desc" style="margin-top:1.2cqh;font-size:1.25cqw">moved over UPI in 2025 — about ten times India's annual federal budget.</div>
+              <div class="bignum acc" style="font-size:4.6cqw">₹299.7<span class="u">L cr</span></div>
+              <div class="call desc" style="margin-top:1.2cqh;font-size:1.25cqw">moved over UPI in 2025 — about <span style="color:var(--indigo-bright);font-weight:700">5.9×</span> India's ₹50.65 lakh-crore federal budget.</div>
+              <div class="src"><b>Source</b> · NPCI / PIB; Union Budget 2025-26</div>
             </div></div>
           </div>
         </div>
       </div>
-      <div class="foot"><span>02 · The Opportunity</span><span class="pageno"></span></div>
+      <div class="foot"><span>02 · The Canvas</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 8 — UPI HERO (img1 layout) -->
-    <section class="slide" data-i="8">
-      <div class="ctop"><span class="kicker">The Opportunity · UPI</span><span class="mark">Meridian</span></div>
+    <!-- 9 — UPI HOCKEY STICK -->
+    <section class="slide" data-i="9">
+      <div class="ctop"><span class="kicker">The Canvas · UPI</span><span class="mark">Harsh D</span></div>
       <div class="body">
         <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">The hockey stick that ate Indian payments.</h2>
         <div class="two even" style="align-items:stretch">
           <div class="card" style="display:flex;flex-direction:column">
             <div class="lead" style="font-size:1.12cqw;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:1.2cqh">Annual UPI volume (transactions)</div>
-            <svg viewBox="0 0 600 250" style="width:100%;height:auto;flex:1" role="img" aria-label="Exponential growth of annual UPI transaction volume from 2017 to 2025 reaching 228 billion">
+            <svg viewBox="0 0 600 264" style="width:100%;height:auto;flex:1" role="img">
+              <title>Annual UPI transaction volume, 2017 to 2025</title>
+              <desc>UPI annual transaction volume grew roughly 12,000-fold since 2017, reaching 172 billion in 2024 and 228 billion in 2025.</desc>
               <defs><linearGradient id="ug" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#5B6CF0" stop-opacity=".34"/><stop offset="1" stop-color="#5B6CF0" stop-opacity="0"/>
               </linearGradient></defs>
-              <path d="M40,232 L168,224 L296,199 L424,128 L520,79 L568,28 L568,240 L40,240 Z" fill="url(#ug)"/>
-              <path d="M40,232 L168,224 L296,199 L424,128 L520,79 L568,28" fill="none" stroke="#5B6CF0" stroke-width="3.4" stroke-linejoin="round"/>
-              <circle cx="520" cy="79" r="5" fill="#5B6CF0"/><text x="520" y="66" text-anchor="middle" font-size="15" font-weight="700" fill="#EEF0F7">172B</text>
-              <circle cx="568" cy="28" r="6.5" fill="#5B6CF0"/><text x="568" y="18" text-anchor="end" font-size="18" font-weight="800" fill="#8E9BF5">228B</text>
+              <line x1="40" y1="228" x2="572" y2="228" stroke="#202840" stroke-width="1"/>
+              <path d="M40,224 L150,220 L260,202 L370,148 L470,96 L548,30 L548,228 L40,228 Z" fill="url(#ug)"/>
+              <path d="M40,224 L150,220 L260,202 L370,148 L470,96 L548,30" fill="none" stroke="#5B6CF0" stroke-width="3.4" stroke-linejoin="round"/>
+              <circle cx="470" cy="96" r="5" fill="#5B6CF0"/><text x="470" y="84" text-anchor="middle" font-size="15" font-weight="700" fill="#EEF0F7">172B</text>
+              <circle cx="548" cy="30" r="6.5" fill="#5B6CF0"/><text x="548" y="20" text-anchor="end" font-size="18" font-weight="800" fill="#8E9BF5">228B</text>
+              <g fill="#828AA2" font-size="13" font-weight="600" text-anchor="middle"><text x="44" y="250">2017</text><text x="300" y="250">2021</text><text x="470" y="250">2024</text><text x="552" y="250">2025</text></g>
             </svg>
-            <div class="pillrow" style="margin-top:1.4cqh;justify-content:space-between"><span class="pill">2017</span><span class="pill">2021</span><span class="pill">2025</span></div>
+            <div class="src"><b>Source</b> · NPCI / PIB, 2025</div>
           </div>
           <div class="panel">
             <div class="pn">228<span class="u">B</span></div>
             <div class="plab">UPI transactions cleared in 2025.</div>
-            <div class="psub">21.6B in December alone · ~12,000× since 2017</div>
+            <div class="psub">~698M/day in Dec 2025 · ~12,000× since 2017</div>
           </div>
         </div>
       </div>
-      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: NPCI, PIB</span><span class="pageno"></span></div>
+      <div class="foot"><span>02 · The Canvas &nbsp;·&nbsp; Source: NPCI, PIB</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 9 — UPI MARKET -->
-    <section class="slide" data-i="9">
-      <div class="ctop"><span class="kicker">The Opportunity · Scale</span><span class="mark">Meridian</span></div>
+    <!-- 10 — LARGEST REAL-TIME SYSTEM -->
+    <section class="slide" data-i="10">
+      <div class="ctop"><span class="kicker">The Canvas · Scale</span><span class="mark">Harsh D</span></div>
       <div class="body">
         <h2 class="h sm" style="margin-bottom:2.8cqh;max-width:36ch">India runs the largest real-time payment system on Earth.</h2>
         <div class="two" style="align-items:center">
           <div style="display:flex;flex-direction:column;align-items:center">
-            <svg viewBox="0 0 220 220" style="width:20cqw;height:auto" role="img" aria-label="India accounts for about half of the world's real-time payment transactions">
+            <svg viewBox="0 0 220 220" style="width:20cqw;height:auto" role="img">
+              <title>India's share of global real-time payments</title>
+              <desc>India accounts for about 49 percent of the world's real-time payment transactions.</desc>
               <circle cx="110" cy="110" r="86" fill="none" stroke="#262D45" stroke-width="20"/>
               <circle cx="110" cy="110" r="86" fill="none" stroke="#5B6CF0" stroke-width="20" stroke-linecap="round"
-                stroke-dasharray="270 540" transform="rotate(-90 110 110)"/>
-              <text x="110" y="104" text-anchor="middle" font-size="46" font-weight="800" fill="#8E9BF5" letter-spacing="-2">≈50%</text>
-              <text x="110" y="130" text-anchor="middle" font-size="14" font-weight="500" fill="#9AA2B8">of world volume</text>
+                stroke-dasharray="265 540" transform="rotate(-90 110 110)"/>
+              <text x="110" y="104" text-anchor="middle" font-size="44" font-weight="800" fill="#8E9BF5" letter-spacing="-2">≈49%</text>
+              <text x="110" y="130" text-anchor="middle" font-size="13" font-weight="500" fill="#9AA2B8">of world volume</text>
             </svg>
             <div class="gap-cap" style="margin-top:1.2cqh;font-size:1.05cqw">India vs. the entire rest of the world</div>
+            <div class="src" style="text-align:center"><b>Source</b> · ACI Worldwide 2024 (2023 data)</div>
           </div>
           <div class="calls">
             <div class="call">
-              <div class="top"><span class="n">+33<span class="u">%</span></span><span class="tag">Volume growth<br>in a single year</span></div>
-              <div class="desc">172B → 228B transactions, year on year.</div>
+              <div class="top"><span class="n">+32.5<span class="u">%</span></span><span class="tag">Volume growth<br>in a single year</span></div>
+              <div class="desc">172.2B → 228.3B transactions, 2024 to 2025.</div>
             </div>
             <div class="call">
               <div class="top"><span class="n">1B<span class="u">/day</span></span><span class="tag">Projected<br>by FY27 (PwC)</span></div>
-              <div class="desc">From roughly 0.7B per day today.</div>
+              <div class="desc">From ~698M per day in Dec 2025 — a projection, not a fact.</div>
             </div>
             <div class="quote" style="font-size:1.5cqw;border:none">And every rupee of it <span class="em">settles through banks.</span></div>
           </div>
         </div>
       </div>
-      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: NPCI, ACI Worldwide, PwC</span><span class="pageno"></span></div>
+      <div class="foot"><span>02 · The Canvas &nbsp;·&nbsp; Source: NPCI, ACI Worldwide, PwC</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 10 — ICICI SCALE GAP -->
-    <section class="slide" data-i="10">
-      <div class="ctop"><span class="kicker">The Opportunity · One Bank</span><span class="mark">Meridian</span></div>
+    <!-- 11 — RAILS ≠ UX POWER (honesty) -->
+    <section class="slide" data-i="11">
+      <div class="ctop"><span class="kicker">The Canvas · Honesty</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <h2 class="h sm" style="margin-bottom:2cqh;max-width:36ch">One bank's app already serves the users a startup only dreams of.</h2>
-        <div class="two even" style="align-items:flex-end">
-          <div class="gap-wrap">
-            <div class="gap-big"><div class="bar"><span class="v">558M</span></div><div class="gap-cap">iMobile transactions<br>FY25 (one bank)</div></div>
-            <div class="gap-small"><div class="dot"></div><div class="gap-cap">≈1M<br>a startup hopes for</div></div>
+        <h2 class="h sm" style="margin-bottom:1.2cqh;max-width:40ch">Banks own the rails. Apps own the screen. Both are true.</h2>
+        <div class="lead" style="margin-bottom:2.2cqh;max-width:62ch">Pretending otherwise is how a deck loses a sharp audience. So let's be precise about where each kind of power actually sits.</div>
+        <div class="two even" style="align-items:stretch">
+          <div class="card">
+            <div class="lead" style="font-size:1.02cqw;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:1cqh">Consumer-UX power</div>
+            <div class="bignum" style="font-size:3.4cqw;font-weight:800">≈85%</div>
+            <div class="lead" style="font-size:1.06cqw;margin-top:1cqh">of UPI volume runs through two non-bank apps — <span class="neg">PhonePe 47.8% + Google Pay 37%</span>. The flashy front-end isn't where banks win.</div>
+          </div>
+          <div class="card" style="border-color:var(--indigo-deep);background:linear-gradient(150deg,var(--card-2),var(--card))">
+            <div class="lead" style="font-size:1.02cqw;color:var(--indigo-bright);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:1cqh">Infrastructure & trust power</div>
+            <div class="bignum acc" style="font-size:3.4cqw;font-weight:800">The rails</div>
+            <div class="lead" style="font-size:1.06cqw;margin-top:1cqh">Settlement, the licence, regulated trust — owned by banks. <span class="em">The highest-stakes surface in the system.</span></div>
+          </div>
+        </div>
+        <div class="lead" style="margin-top:2cqh;font-size:1.15cqw;max-width:none">When the RBI cancelled <span class="em">Paytm Payments Bank's</span> licence, Paytm had to ride Axis &amp; Yes Bank rails overnight. The regulated trust layer — not the app — is the bet.</div>
+      </div>
+      <div class="foot"><span>02 · The Canvas &nbsp;·&nbsp; Source: Reuters (Nov 2024); RBI orders, Business Standard (2024–26)</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 12 — ICICI AS PROOF OF SCALE -->
+    <section class="slide" data-i="12">
+      <div class="ctop"><span class="kicker">The Canvas · One Bank</span><span class="mark">Harsh D</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:38ch">One bank's app already operates at a scale startups chase for a decade.</h2>
+        <div class="two even" style="align-items:center">
+          <div>
+            <div class="bignum acc" style="font-size:6cqw">558<span class="u">M</span></div>
+            <div class="lead" style="font-size:1.3cqw;margin-top:1.2cqh;max-width:30ch">iMobile transactions in FY25 — from a single bank's app.</div>
           </div>
           <div style="display:flex;flex-direction:column;gap:1.4cqh;align-self:center">
-            <div class="statchip" style="font-size:1.3cqw"><b>₹11.2T</b><span class="sep"></span>value moved in FY25</div>
-            <div class="statchip" style="font-size:1.3cqw"><b>18M</b><span class="sep"></span>active credit cards</div>
-            <div class="statchip" style="font-size:1.3cqw"><b>400+</b><span class="sep"></span>services in one app</div>
+            <div class="statchip" style="font-size:1.3cqw"><b>₹11,238B</b><span class="sep"></span>value moved in FY25</div>
+            <div class="statchip" style="font-size:1.3cqw"><b>~18M</b><span class="sep"></span>active credit cards</div>
+            <div class="statchip" style="font-size:1.3cqw"><b>National</b><span class="sep"></span>scale, from day one</div>
           </div>
         </div>
-        <div class="quote" style="margin-top:2.6cqh;font-size:1.5cqw">Hundreds of millions <span class="em">today</span> — against a hoped-for million <span class="subtle">someday.</span></div>
+        <div class="src" style="margin-top:2cqh"><b>Source</b> · ICICI Bank Integrated Report 2024-25</div>
       </div>
-      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: ICICI Bank Annual Report FY2025</span><span class="pageno"></span></div>
+      <div class="foot"><span>02 · The Canvas &nbsp;·&nbsp; Source: ICICI Bank Integrated Report FY2025</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 11 — MOAT -->
-    <section class="slide" data-i="11">
-      <div class="ctop"><span class="kicker">The Opportunity · The Moat</span><span class="mark">Meridian</span></div>
+    <!-- 13 — MATURITY GAP = LEVERAGE -->
+    <section class="slide" data-i="13">
+      <div class="ctop"><span class="kicker">Part Three — The Bet</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">Fintechs are tenants. Banks own the building.</h2>
-        <div class="stack">
-          <div class="layer l1"><div><div class="lt">The consumer app</div><div class="ls">Slick UI, brand, growth — and entirely replaceable.</div></div><div class="lb">Layer 1 · replaceable</div></div>
-          <div class="layer l2"><div><div class="lt">The rails — NPCI / UPI</div><div class="ls">The pipes every app rides on, owned by the banks.</div></div><div class="lb">Layer 2 · bank-owned</div></div>
-          <div class="layer l3"><div><div class="lt">The bank &amp; the licence</div><div class="ls">Regulated trust no fintech can replicate overnight.</div></div><div class="lb">Layer 3 · the moat</div></div>
-        </div>
-        <div class="lead" style="margin-top:2.4cqh;font-size:1.25cqw;max-width:none">When the RBI cancelled Paytm Payments Bank's licence, Paytm was forced onto <span class="em">Axis &amp; Yes Bank</span> rails overnight.</div>
-      </div>
-      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: RBI orders, Business Standard</span><span class="pageno"></span></div>
-    </section>
-
-    <!-- 12 — HIRING + ROI -->
-    <section class="slide" data-i="12">
-      <div class="ctop"><span class="kicker">The Opportunity · Designers</span><span class="mark">Meridian</span></div>
-      <div class="body">
-        <h2 class="h sm" style="margin-bottom:2.6cqh;max-width:36ch">Banks are hiring designers — and they're early.</h2>
+        <h2 class="h sm" style="margin-bottom:2.6cqh;max-width:36ch">Design here is immature — and that's the opening.</h2>
         <div class="two even" style="align-items:center">
           <div style="display:flex;flex-direction:column;align-items:flex-start;gap:1.6cqh">
             <div class="dotgrid" id="dotgrid"></div>
-            <div class="lead" style="font-size:1.15cqw">Only <span class="em">~10%</span> of firms reach top-tier design maturity — fewer still in banking. The runway is wide open.</div>
+            <div class="lead" style="font-size:1.15cqw">Fewer than <span class="em">5%</span> of leaders can make objective design decisions. In banking, fewer still — so an early designer sets the standard.</div>
+            <div class="src"><b>Source</b> · McKinsey, The Business Value of Design, 2018</div>
           </div>
+          <div style="display:flex;flex-direction:column;gap:1.8cqh">
+            <div class="lead" style="font-size:1.3cqw;max-width:36ch">Banks are <span class="em">design-maturing</span>, not design-mature: in-house academies, new UX teams, real budgets arriving.</div>
+            <div class="rcard pos"><div class="rt" style="font-size:1.3cqw">Opportunity — and risk</div><div class="rd">Low maturity means you can shape the function. It also means chaos: the team may not exist as you'd want it yet.</div></div>
+          </div>
+        </div>
+        <div class="lead" style="margin-top:1.8cqh;font-size:1.15cqw;max-width:none">This is the honest version of "you're early" — <span class="em">leverage, not a guarantee.</span></div>
+      </div>
+      <div class="foot"><span>03 · The Bet</span><span class="pageno"></span></div>
+    </section>
+
+    <!-- 14 — CORRECTED McKINSEY EVIDENCE -->
+    <section class="slide" data-i="14">
+      <div class="ctop"><span class="kicker">The Bet · Evidence</span><span class="mark">Harsh D</span></div>
+      <div class="body">
+        <h2 class="h sm" style="margin-bottom:2.8cqh;max-width:34ch">When design leads, the balance sheet moves.</h2>
+        <div class="two even" style="align-items:center">
           <div class="calls">
             <div class="call">
-              <div class="top"><span class="n">+27<span class="u">%</span></span><span class="tag">Revenue, over<br>five years</span></div>
-              <div class="desc">Top-quartile, design-led retail banks (McKinsey).</div>
+              <div class="top"><span class="n">+18<span class="u">%</span></span><span class="tag">Revenue growth<br>retail banking</span></div>
+              <div class="desc">Top-quartile design performers vs. the rest.</div>
             </div>
             <div class="call">
-              <div class="top"><span class="n">+18<span class="u">%</span></span><span class="tag">Total returns<br>to shareholders</span></div>
+              <div class="top"><span class="n">+27<span class="u">%</span></span><span class="tag">Total returns<br>to shareholders</span></div>
               <div class="desc">Same cohort — design compounds on the balance sheet.</div>
             </div>
           </div>
-        </div>
-        <div class="lead" style="margin-top:2cqh;font-size:1.2cqw;max-width:none">Startup = influence, no resources. Big tech = resources, no influence. <span class="em">The right bank = both.</span></div>
-      </div>
-      <div class="foot"><span>02 · The Opportunity &nbsp;·&nbsp; Source: McKinsey, Business Value of Design</span><span class="pageno"></span></div>
-    </section>
-
-    <!-- 13 — DIVIDER: PART THREE -->
-    <section class="slide" data-i="13">
-      <div class="ctop"><span class="kicker">Part Three — The Work</span><span class="mark">Meridian</span></div>
-      <div class="body">
-        <div class="two" style="align-items:center">
-          <div>
-            <h2 class="h lg">Forget the logo.<br>Look at the work.</h2>
-            <div class="lead" style="margin-top:2.4cqh">The real reason to take the seat isn't safety — it's what you get to design.</div>
-          </div>
           <div class="card">
-            <div class="calls"><div class="call" style="border:none;padding:0">
-              <div class="bignum acc" style="font-size:5.4cqw">400+</div>
-              <div class="call desc" style="margin-top:1.2cqh;font-size:1.25cqw">live journeys inside a single banking app — your design surface from day one.</div>
-            </div></div>
+            <div class="lead" style="font-size:1.2cqw">Across all sectors the gap is even larger — <span class="em">+32% revenue and +56% TRS</span> for top-quartile design performers.</div>
+            <div class="lead" style="font-size:1.05cqw;margin-top:1.4cqh;color:var(--text-faint)">300 companies, tracked 2013–2018.</div>
+            <div class="src" style="margin-top:1.4cqh"><b>Source</b> · McKinsey, The Business Value of Design, 2018</div>
           </div>
         </div>
+        <div class="lead" style="margin-top:2cqh;font-size:1.2cqw;max-width:none">Startup = influence, few resources. Big tech = resources, little influence. <span class="em">The right bank can give you both.</span></div>
       </div>
-      <div class="foot"><span>03 · The Work</span><span class="pageno"></span></div>
+      <div class="foot"><span>03 · The Bet &nbsp;·&nbsp; Source: McKinsey, The Business Value of Design (2018)</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 14 — SCALE -->
-    <section class="slide" data-i="14">
-      <div class="ctop"><span class="kicker">The Work · Scale</span><span class="mark">Meridian</span></div>
-      <div class="body">
-        <h2 class="h sm" style="margin-bottom:2.4cqh;max-width:34ch">Your smallest change, multiplied by millions.</h2>
-        <div class="two" style="align-items:center">
-          <div>
-            <div class="lead" style="font-size:1.5cqw;max-width:42ch">There's no quiet sandbox. The day you ship, your decision is in hundreds of millions of hands — half a second of friction becomes a national problem, and a clearer screen becomes a national win.</div>
-            <div class="pillrow" style="margin-top:3cqh">
-              <span class="statchip" style="font-size:1.25cqw"><b>≈700M</b><span class="sep"></span>payments clear every single day</span>
-            </div>
-          </div>
-          <div style="display:flex;justify-content:center;align-items:center">
-            <svg viewBox="0 0 320 320" style="width:18cqw;height:auto" role="img" aria-label="One design decision rippling outward to hundreds of millions of users">
-              <circle cx="160" cy="150" r="118" fill="none" stroke="#5B6CF0" stroke-width="1.5" opacity=".16"/>
-              <circle cx="160" cy="150" r="86" fill="none" stroke="#5B6CF0" stroke-width="1.5" opacity=".3"/>
-              <circle cx="160" cy="150" r="54" fill="none" stroke="#5B6CF0" stroke-width="2" opacity=".55"/>
-              <circle cx="160" cy="150" r="26" fill="#5B6CF0"/>
-              <text x="160" y="158" text-anchor="middle" font-size="24" font-weight="800" fill="#fff">1</text>
-              <text x="160" y="304" text-anchor="middle" font-size="14" font-weight="600" fill="#8E9BF5">one change → hundreds of millions</text>
-            </svg>
-          </div>
-        </div>
-      </div>
-      <div class="foot"><span>03 · The Work &nbsp;·&nbsp; Source: NPCI (Dec 2025 UPI)</span><span class="pageno"></span></div>
-    </section>
-
-    <!-- 15 — STAKES -->
+    <!-- 15 — HONEST TRADEOFFS -->
     <section class="slide" data-i="15">
-      <div class="ctop"><span class="kicker">The Work · Stakes</span><span class="mark">Meridian</span></div>
+      <div class="ctop"><span class="kicker">The Bet · Honest Tradeoffs</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <h2 class="h sm" style="margin-bottom:2.8cqh;max-width:30ch">The highest-stakes canvas in the country.</h2>
+        <h2 class="h sm" style="margin-bottom:2.8cqh;max-width:34ch">What you're trading away — say it out loud.</h2>
         <div class="rcards">
-          <div class="rcard pos"><div class="rt">Clarity beats clever</div><div class="rd">When the screen holds someone's salary and savings, the boldest move is making it unmistakable.</div></div>
-          <div class="rcard pos"><div class="rt">Error states matter most</div><div class="rd">The screen that quietly stops a wrong transfer is the work no one thanks you for — and the work that counts.</div></div>
-          <div class="rcard pos"><div class="rt">Trust is the metric</div><div class="rd">Not time-on-app or streaks. Did they feel safe moving their money — and were they right to?</div></div>
+          <div class="rcard"><div class="rt">Slow shipping</div><div class="rd">Release trains and change-advisory gates. Nothing ships in a weekend.</div></div>
+          <div class="rcard"><div class="rt">Compliance gating</div><div class="rd">Regulation sits upstream of design. Some doors are closed before you start.</div></div>
+          <div class="rcard"><div class="rt">Service-desk risk</div><div class="rd">Low maturity can mean design-as-decoration — until you fight for a seat.</div></div>
         </div>
-        <div class="lead" style="margin-top:2.8cqh;font-size:1.25cqw;max-width:none">A confusing flow here isn't a bounce — it's real harm. That raises the bar on <span class="em">every</span> decision you make.</div>
+        <div class="lead" style="margin-top:2.8cqh;font-size:1.25cqw;max-width:none">In return: <span class="em">population-scale impact, stable formal employment, and the most consequential problems in the country.</span> Fits if you want scale and stakes; if you want rapid shipping and end-to-end ownership, a product startup may suit you better.</div>
       </div>
-      <div class="foot"><span>03 · The Work</span><span class="pageno"></span></div>
+      <div class="foot"><span>03 · The Bet · choose with eyes open</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 16 — THE BRIEFS -->
+    <!-- 16 — THE WORK / THE BRIEFS -->
     <section class="slide" data-i="16">
-      <div class="ctop"><span class="kicker">The Work · The Briefs</span><span class="mark">Meridian</span></div>
+      <div class="ctop"><span class="kicker">The Bet · The Work</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <h2 class="h sm" style="margin-bottom:3cqh;max-width:32ch">Problems no startup can hand you.</h2>
+        <h2 class="h sm" style="margin-bottom:1.2cqh;max-width:34ch">The highest-stakes canvas in the country.</h2>
+        <div class="lead" style="margin-bottom:2.4cqh;max-width:62ch">Clarity over cleverness, error-prevention over delight, trust over engagement metrics — because a confusing flow here isn't a bounce, it's real harm. These are banking-heavy problems, concentrated in — not exclusive to — banks:</div>
         <div class="checks">
           <div class="chk"><div class="num">1</div><div><div class="ct">Bring the next 100M online</div><div class="cs">First-time digital users graduating from cash and feature phones.</div></div></div>
           <div class="chk"><div class="num">2</div><div><div class="ct">Design for India's real conditions</div><div class="cs">A dozen languages, low literacy, ₹8,000 phones, patchy networks.</div></div></div>
           <div class="chk"><div class="num">3</div><div><div class="ct">Make high-stakes feel simple</div><div class="cs">A loan, a dispute, a KYC check — safe and clear in a few taps.</div></div></div>
-          <div class="chk"><div class="num">4</div><div><div class="ct">Turn regulation into craft</div><div class="cs">Hard constraints that sharpen design — like accessibility or performance budgets.</div></div></div>
+          <div class="chk"><div class="num">4</div><div><div class="ct">Turn regulation into craft</div><div class="cs">Hard constraints that sharpen design — accessibility, performance budgets.</div></div></div>
         </div>
-        <div class="lead" style="margin-top:3cqh;font-size:1.25cqw;max-width:none">A startup can't give you these and big tech won't — <span class="em">because only a bank owns them.</span></div>
       </div>
-      <div class="foot"><span>03 · The Work</span><span class="pageno"></span></div>
+      <div class="foot"><span>03 · The Bet</span><span class="pageno"></span></div>
     </section>
 
-    <!-- 17 — VERDICT -->
+    <!-- 17 — OPERATIONAL CTA: 6 INTERVIEW QUESTIONS -->
     <section class="slide" data-i="17">
-      <div class="ctop"><span class="kicker">The Verdict</span><span class="mark">Meridian</span></div>
+      <div class="ctop"><span class="kicker">Act · The CTA</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <h2 class="h lg" style="max-width:18ch">Build on the <span class="ac">rails</span>,<br>not the runway.</h2>
-        <div class="lead" style="margin-top:3cqh;font-size:1.85cqw;max-width:42ch">A startup asks you to bet on its survival. A bank lets you bet on India's.</div>
+        <h2 class="h sm" style="margin-bottom:1.2cqh;max-width:32ch">Don't worship the logo. Vet the team.</h2>
+        <div class="lead" style="margin-bottom:2.4cqh;max-width:62ch">Interview three places you'd normally dismiss — including a bank — and score each on the five criteria. Ask:</div>
+        <div class="checks">
+          <div class="chk"><div class="num">1</div><div><div class="ct">Who owns product decisions?</div></div></div>
+          <div class="chk"><div class="num">2</div><div><div class="ct">How many designers &amp; researchers are on the team?</div></div></div>
+          <div class="chk"><div class="num">3</div><div><div class="ct">What shipped in the last 12 months?</div></div></div>
+          <div class="chk"><div class="num">4</div><div><div class="ct">How is design measured?</div></div></div>
+          <div class="chk"><div class="num">5</div><div><div class="ct">Which user problems are highest-stakes?</div></div></div>
+          <div class="chk"><div class="num">6</div><div><div class="ct">How much influence does design have past the mockup stage?</div></div></div>
+        </div>
       </div>
-      <div class="foot"><span>The Boring Revolution</span><span class="pageno"></span></div>
+      <div class="foot"><span>Act · score on scale · team · decision rights · learning · leverage</span><span class="pageno"></span></div>
     </section>
 
     <!-- 18 — CLOSE -->
     <section class="slide" data-i="18">
-      <div class="ctop"><span class="kicker">Close</span><span class="mark">Meridian</span></div>
+      <div class="ctop"><span class="kicker">Close</span><span class="mark">Harsh D</span></div>
       <div class="body">
-        <h2 class="h md" style="max-width:22ch">You're <span class="ac">early</span> — not late.</h2>
-        <div class="lead" style="margin-top:2.4cqh;font-size:1.5cqw;max-width:52ch">Still deciding where to go? Interview at the bank you've been ignoring. Already joined one? You're ahead of the field — most of the market just hasn't done the math yet.</div>
-        <div class="card" style="margin-top:2.8cqh;padding:2cqw 2.4cqw">
-          <div class="lead" style="font-size:.98cqw;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:1.2cqh">Sources</div>
-          <div class="lead" style="font-size:1.02cqw;line-height:1.7;max-width:none;color:var(--text-soft)">NPCI &amp; PIB (UPI volumes) · ACI Worldwide (global real-time payments share) · PwC (FY27 projection) · ICICI Bank Annual Report FY2025 · Inc42 &amp; Business Standard (startup shutdowns, edtech funding) · layoffs.fyi &amp; TrueUp (global tech layoffs) · RBI orders (Paytm Payments Bank) · McKinsey, "The Business Value of Design."</div>
+        <h2 class="h md" style="max-width:24ch">You're <span class="ac">early</span> — that's leverage, not luck.</h2>
+        <div class="lead" style="margin-top:2.4cqh;font-size:1.4cqw;max-width:56ch">Still deciding? Go score the bank you've been ignoring against the five criteria. Just joined one? You're early to a low-maturity, high-trust field most of the market hasn't done the math on — that's your edge. Go claim it.</div>
+        <div class="card" style="margin-top:2.6cqh;padding:1.8cqw 2.2cqw">
+          <div class="lead" style="font-size:.98cqw;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:1cqh">Sources</div>
+          <div class="lead" style="font-size:.96cqw;line-height:1.7;max-width:none;color:var(--text-soft)">UPI volume &amp; value: NPCI / PIB (2025) · Global real-time share ≈49%: ACI Worldwide 2024 (2023 data) · 1B/day by FY27: PwC (projection) · ICICI 558M txns / ₹11,238B / 18M cards: ICICI Integrated Report FY2025 · Startup shutdowns 729, IPOs, unicorns: Tracxn, Inc42, Business Standard (2025) · TCS −23,460 &amp; global layoffs: Moneycontrol, TrueUp (2025–26) · UPI app share: Reuters (Nov 2024) · Paytm licence: RBI orders, Business Standard (2024–26) · Graduate unemployment 29.1%: ILO/IHD India Employment Report 2024 · Design ROI +18%/+27% (retail), +32%/+56% (overall): McKinsey, The Business Value of Design (2018) · Federal budget ₹50.65L cr: Union Budget 2025-26.</div>
         </div>
-        <div class="lead" style="margin-top:2cqh;font-size:.98cqw;color:var(--text-faint)">"Meridian" is an illustrative fund identity — swap for your own branding.</div>
       </div>
       <div class="foot"><span>The Boring Revolution · Talent Thesis No. 02</span><span class="pageno"></span></div>
     </section>
@@ -662,9 +677,9 @@
     <div class="navzone prev" id="prevzone" aria-label="Previous slide" role="button" tabindex="-1"></div>
     <div class="navzone next" id="nextzone" aria-label="Next slide" role="button" tabindex="-1"></div>
     <div class="navbar">
-      <button class="chev" id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button class="chev" id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
       <span class="counter"><b id="cur">01</b> / 18</span>
-      <button class="chev" id="next" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+      <button class="chev" id="next" aria-label="Next slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
     </div>
   </div>
 </div>
@@ -677,9 +692,9 @@
     var cur = document.getElementById('cur');
     var pagenos = document.querySelectorAll('.pageno');
 
-    // build dot grid (slide 12): 100 dots, 10 on
+    // build dot grid (maturity slide): 100 dots, 5 on (<5% design maturity)
     var dg = document.getElementById('dotgrid');
-    if(dg){ for(var d=0;d<100;d++){ var el=document.createElement('i'); if(d<10) el.className='on'; dg.appendChild(el);} }
+    if(dg){ for(var d=0;d<100;d++){ var el=document.createElement('i'); if(d<5) el.className='on'; dg.appendChild(el);} }
 
     function pad(n){ return (n<10?'0':'')+n; }
     function show(n){
